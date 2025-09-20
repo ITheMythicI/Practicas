@@ -35,74 +35,62 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.practicas.ui.theme.PracticasTheme
 
-class MainActivity : ComponentActivity() {
+import android.widget.Toast
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            PracticasTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting()
-                }
+            MaterialTheme {
+                MainScreen()
             }
         }
     }
 }
 
 @Composable
-fun Greeting() {
-    val context= LocalContext.current
-    var ValorA by remember { mutableStateOf("") }
-    var ValorB by remember { mutableStateOf("") }
-    var Resultado by remember { mutableStateOf("") }
+fun MainScreen() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Row(Modifier.padding(16.dp)){
-            OutlinedTextField(
-                value=ValorA,
-                label={Text("Primer Valor")},
-                onValueChange ={ValorA=it}
-            )
-        }
-        Row(Modifier.padding(16.dp)){
-            OutlinedTextField(
-                value=ValorB,
-                label={Text("Segundo Valor")},
-                onValueChange ={ValorB=it}
-            )
-        }
-        Row(
-            Modifier.align(Alignment.CenterHorizontally)
-        ){
-            OutlinedButton(onClick = { /*TODO*/
-                val a=ValorA.toInt()
-                val b=ValorB.toInt()
-                val c=a+b
-                Resultado=c.toString()
-
-            }) {
-                Text(text = "Enviar")
-            }
-        }
-        Row(
-            modifier=Modifier
-                .padding(16.dp)
-                .align(Alignment.CenterHorizontally
-                )
-        ){
-            OutlinedTextField(
-                value=Resultado,
-                label={Text("Resultado")},
-                onValueChange ={Resultado=it}
-            )
-        }
-
+    ) {
+        SimpleTextField()
+        Spacer(Modifier.height(16.dp))
+        SimpleButton()
     }
 }
+
+@Composable
+fun SimpleTextField() {
+    var texto by remember {
+        mutableStateOf(
+            TextFieldValue("Erick Gabriel Perez Castro 22130850")
+        )
+    }
+    TextField(
+        value = texto,
+        onValueChange = { nuevoTexto -> texto = nuevoTexto },
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+@Composable
+fun SimpleButton() {
+    val context = LocalContext.current
+    Button(
+        onClick = { Toast.makeText(context, "Enviado", Toast.LENGTH_SHORT).show() },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text = "Enviar")
+    }
+}
+
