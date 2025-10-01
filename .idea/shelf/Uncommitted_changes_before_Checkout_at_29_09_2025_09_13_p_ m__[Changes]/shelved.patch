@@ -1,0 +1,23 @@
+Index: app/src/main/java/com/example/segundodia/onBoardViews/MainOnBoarding.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.segundodia.onBoardViews\r\n\r\nimport androidx.compose.foundation.ExperimentalFoundationApi\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.layout.fillMaxHeight\r\nimport androidx.compose.foundation.layout.fillMaxWidth\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout\r\nimport androidx.navigation.NavController\r\nimport com.example.segundodia.R\r\nimport com.example.segundodia.data.PageData\r\nimport com.example.segundodia.dataStore.StoreBoarding\r\nimport com.google.accompanist.pager.ExperimentalPagerApi\r\nimport com.google.accompanist.pager.rememberPagerState\r\nimport com.google.accompanist.pager.PagerState\r\n\r\n@OptIn(ExperimentalPagerApi::class,\r\n    ExperimentalFoundationApi::class)\r\n\r\n@Composable\r\nfun MainOnBoarding(navController: NavController, store: StoreBoarding){\r\n    val items=ArrayList<PageData>()\r\n\r\n    items.add(\r\n        PageData(\r\n            image= R.raw.car_wash,\r\n            titulo=\"Primer Titulo\",\r\n            descripcion=\"Descripcion 1\"\r\n        )\r\n    )\r\n\r\n    items.add(\r\n        PageData(\r\n            image=R.raw.clean,\r\n            titulo=\"Segunda Imagen\",\r\n            descripcion = \"Esta es la segunda descripcion\"\r\n        )\r\n    )\r\n    items.add(\r\n        PageData(\r\n            image=R.raw.desinfectar,\r\n            titulo = \"Tercera imagen\",\r\n            descripcion = \"Esta es la tercera imagen de la descripcion\"\r\n        )\r\n    )\r\n    val pagerState  = rememberPagerState(\r\n        pageCount=items.size,\r\n        initialOffscreenLimit =2,\r\n        infiniteLoop=false,\r\n        initialPage=0\r\n    )\r\n    OnBoardingPager(\r\n        item=items,pagerState = pagerState,modifier= Modifier\r\n            .fillMaxWidth()\r\n            .fillMaxHeight()\r\n            .background(Color.White),\r\n        navController,store\r\n    )\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/segundodia/onBoardViews/MainOnBoarding.kt b/app/src/main/java/com/example/segundodia/onBoardViews/MainOnBoarding.kt
+--- a/app/src/main/java/com/example/segundodia/onBoardViews/MainOnBoarding.kt	(revision 2258134f66745f3dc7ed74d05cc192a7ab7ce766)
++++ b/app/src/main/java/com/example/segundodia/onBoardViews/MainOnBoarding.kt	(date 1759201830620)
+@@ -44,6 +44,14 @@
+             titulo = "Tercera imagen",
+             descripcion = "Esta es la tercera imagen de la descripcion"
+         )
++
++    )
++    items.add(
++        PageData(
++            image=R.raw.desinfectar,
++            titulo = "Tercera imagen",
++            descripcion = "Esta es la tercera imagen de la descripcion"
++        )
+     )
+     val pagerState  = rememberPagerState(
+         pageCount=items.size,
